@@ -1,0 +1,30 @@
+.program
+.data
+codeSize 256
+dataSize 256
+stackSize 256
+heapSize 256
+.end
+.code
+
+move r0, 0   // storage address
+move r1, 4	// memory address
+move r2, 4	// size
+interrupt read
+
+move @4, r0
+move @8, 0
+move r2, r1
+//move @4, @0
+move r0, @0
+move @4, r0
+.label loop
+compare @0, @4
+jumpGraterThan loopEnd
+add @8, 1
+jump label
+.label loopEnd
+move r0, @8
+interrupt write
+halt
+.end

@@ -1,0 +1,17 @@
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
+public class DirectoryPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+
+	private PDirectoryTable campusTable;
+	
+	public DirectoryPanel() {
+		this.campusTable = new PDirectoryTable();
+		this.add(this.campusTable);
+	}
+	
+	private class PDirectoryTable extends JTable {
+		
+	}
+}

@@ -1,0 +1,41 @@
+.program
+.data
+codeSize 50
+dataSize 10
+stackSize 4
+// int i;  		@0
+// int count; 	@1
+// int sum;		@2
+// int value;	@3
+heapSize 10
+.end
+
+.code
+// i = 0;
+move @0 0
+// sum = 0
+move @2 0
+// count = readInt();
+move r0 1   
+interrupt readInt
+
+// while (i < count) {
+label while
+subtract i count
+greaterThanEqual whileEnd
+//    value = readInt();
+move r0 3  
+interrupt readInt
+//    sum = sum + value;
+add @2 @3
+//    i = i + 1;
+increment i
+jump while
+// }
+label whileEnd
+// writeInt(sum);
+move r0 2
+interrupt writeInt
+halt
+
+.end

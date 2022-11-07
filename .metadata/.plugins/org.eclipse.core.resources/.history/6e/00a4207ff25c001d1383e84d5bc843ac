@@ -1,0 +1,32 @@
+import java.util.Vector;
+
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class DirectoryPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+
+	private PDirectoryTable campusTable;
+	
+	public DirectoryPanel() {
+		this.campusTable = new PDirectoryTable("campus");
+		this.add(this.campusTable);
+		
+
+	}
+	
+	private class PDirectoryTable extends JTable {
+		private static final long serialVersionUID = 1L;
+		
+		private DefaultTableModel tableModel;
+		
+		public PDirectoryTable(String title) {
+			Vector<String> header = new Vector<String>();
+			header.addElement(title);
+			this.tableModel = new DefaultTableModel(header, 0);			
+			this.setModel(this.tableModel);
+			
+		}
+	}
+}

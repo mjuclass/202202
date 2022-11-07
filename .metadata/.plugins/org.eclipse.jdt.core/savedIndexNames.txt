@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\Users\chois\OneDrive\문서\강의\학부강의\강의_202202\eclipse\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index

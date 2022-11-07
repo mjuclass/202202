@@ -1,0 +1,9 @@
+import javax.swing.JPanel;
+
+public class PAccountPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+
+	public PAccountPanel() {
+		// TODO Auto-generated constructor stub
+	}
+}

@@ -1,0 +1,23 @@
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class PAccountPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+
+	public PAccountPanel(String name) {
+		JLabel lName = new JLabel(name);
+		this.add(lName);
+		
+		JLabel lInsa = new JLabel("씨 안영하세요!");
+		this.add(lInsa);
+		
+		JLabel lLogin = new JLabel("로그인 시간은");
+		this.add(lLogin);
+		
+		JLabel lTime = new JLabel("2022-10-31 11:03");
+		this.add(lTime);
+		
+		JLabel lText = new JLabel("입니다.");
+		this.add(lText);
+	}
+}

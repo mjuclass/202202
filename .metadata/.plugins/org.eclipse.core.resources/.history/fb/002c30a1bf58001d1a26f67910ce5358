@@ -1,0 +1,26 @@
+import java.awt.LayoutManager;
+
+import javax.swing.JPanel;
+
+public class PAccountPanel extends JPanel {
+
+	public PAccountPanel() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public PAccountPanel(LayoutManager layout) {
+		super(layout);
+		// TODO Auto-generated constructor stub
+	}
+
+	public PAccountPanel(boolean isDoubleBuffered) {
+		super(isDoubleBuffered);
+		// TODO Auto-generated constructor stub
+	}
+
+	public PAccountPanel(LayoutManager layout, boolean isDoubleBuffered) {
+		super(layout, isDoubleBuffered);
+		// TODO Auto-generated constructor stub
+	}
+
+}

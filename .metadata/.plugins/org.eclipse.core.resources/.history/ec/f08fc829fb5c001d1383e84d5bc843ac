@@ -1,0 +1,12 @@
+import javax.swing.JPanel;
+
+public class PSugangsincheongPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+
+	private PDirectoryPanel directoryPanel;
+	
+	public PSugangsincheongPanel() {
+		this.directoryPanel = new PDirectoryPanel();
+		this.add(this.directoryPanel);
+	}
+}
