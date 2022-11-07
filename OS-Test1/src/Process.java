@@ -95,7 +95,7 @@ public class Process {
 					instruction.getCommand().compareTo("move") == 0 ||
 					instruction.getCommand().compareTo("add") == 0 ||
 					instruction.getCommand().compareTo("subtract") == 0) {
-				
+				this.parseOperand(instruction);
 			}
 		}		
 	}
