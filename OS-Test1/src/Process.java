@@ -3,6 +3,13 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class Process {
+	public enum EOperand {
+		eRegister,
+		eAddress,
+		eValue
+	}
+
+	
 	private int PC;
 	private Vector<Integer> registers;
 	
@@ -59,14 +66,36 @@ public class Process {
 			instruction = new Instruction(scanner);
 		}
 	}
+	
+	private Instruction parseOperand(Instruction instruction) {
+		String operand = instruction.getOperand1();
+		EOperand eOperand = null;
+		if (operand.charAt(0) == 'r') {
+			eOperand = EOperand.eRegister;
+			operand = operand.substring(1);
+		} else if (operand.charAt(0) == '@') {
+			eOperand = EOperand.eAddress;
+			operand = operand.substring(1);
+		} else {
+			eOperand = EOperand.eValue;
+		}
+
+		return instruction;
+	}
+	
 	private void parsePhaseII() {
 		for (Instruction instruction: this.codeSegment ) {
 			if (instruction.getCommand().compareTo("greaterThanEqual") == 0) {
 				int lineNO = this.labelMap.get(instruction.getOperand1());
-				instruction.setOperand1(Integer.toString(lineNO));
+				instruction.setOperand1(EOperand.eVlaue, Integer.toString(lineNO));
 			} else if (instruction.getCommand().compareTo("jump") == 0) {
 				int lineNO = this.labelMap.get(instruction.getOperand1());
-				instruction.setOperand1(Integer.toString(lineNO));
+				instruction.setOperand1(EOperand.eVlaue, Integer.toString(lineNO));
+			} else if (
+					instruction.getCommand().compareTo("move") == 0 ||
+					instruction.getCommand().compareTo("add") == 0 ||
+					instruction.getCommand().compareTo("subtract") == 0) {
+				
 			}
 		}		
 	}
@@ -101,12 +130,28 @@ public class Process {
 	
 	private class Instruction {
 		private String[] tokens;
-//		private String co
+		
+		private String command;
+		private EOperand eOperand1;
+		private String operand1;
+		private EOperand eOperand2;
+		private String operand2;
 		
 		public Instruction(Scanner scanner) {
 			String line = scanner.nextLine();
-			this.tokens = line.split(" ");		
-		}		
+			this.tokens = line.split(" ");
+			this.command = this.tokens[0];
+			this.operand1 = "";
+			this.operand2 = "";
+			
+			if (this.tokens.length > 1) {
+				this.operand1 = this.tokens[1];
+			} 
+			if (this.tokens.length > 2) {
+				this.operand2 = this.tokens[2];				
+			}			
+		}
+		
 		public void println() {
 			String line = new String();
 			for (String token: this.tokens) {
@@ -114,17 +159,30 @@ public class Process {
 			}
 			System.out.println(line);
 		}
-		public void setOperand1(String operand1) {
-			this.tokens[1] = operand1;
+		
+		public void setOperand1(EOperand eOperand, String operand) {
+			this.eOperand1 = eOperand;
+			this.operand1 = operand;			
 		}
+		public void setOperand2(EOperand eOperand, String operand) {
+			this.eOperand2 = eOperand;
+			this.operand2 = operand;			
+		}
+		
 		public String getCommand() {
-			return tokens[0];
+			return command;
+		}
+		public EOperand getEOperand1() {
+			return eOperand1;
 		}
 		public String getOperand1() {
-			return tokens[1];
+			return operand1;
+		}
+		public EOperand getEOperand2() {
+			return eOperand2;
 		}
 		public String getOperand2() {
-			return tokens[2];
+			return operand2;
 		}		
 	}
 }
