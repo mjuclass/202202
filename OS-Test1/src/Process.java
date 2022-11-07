@@ -87,10 +87,10 @@ public class Process {
 		for (Instruction instruction: this.codeSegment ) {
 			if (instruction.getCommand().compareTo("greaterThanEqual") == 0) {
 				int lineNO = this.labelMap.get(instruction.getOperand1());
-				instruction.setOperand1(EOperand.eVlaue, Integer.toString(lineNO));
+				instruction.setOperand1(EOperand.eValue, Integer.toString(lineNO));
 			} else if (instruction.getCommand().compareTo("jump") == 0) {
 				int lineNO = this.labelMap.get(instruction.getOperand1());
-				instruction.setOperand1(EOperand.eVlaue, Integer.toString(lineNO));
+				instruction.setOperand1(EOperand.eValue, Integer.toString(lineNO));
 			} else if (
 					instruction.getCommand().compareTo("move") == 0 ||
 					instruction.getCommand().compareTo("add") == 0 ||
