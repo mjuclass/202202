@@ -3,14 +3,9 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class Process {
-	public enum EOperand {
-		eRegister,
-		eAddress,
-		eValue
-	}
-
-	
+	private static final int MAX_REGISTERS = 10;
 	private int PC;
+	private boolean bGreaterThanEqual;
 	private Vector<Integer> registers;
 	
 	private Vector<Instruction> codeSegment;
@@ -22,7 +17,11 @@ public class Process {
 	private HashMap<String, Integer> labelMap;
 	
 	public Process() {
-		this.registers = new Vector<Integer>();
+		this.bGreaterThanEqual = false;
+		this.registers = new Vector<Integer>(MAX_REGISTERS);
+		for (int i=0; i<MAX_REGISTERS; i++) {
+			this.registers.add(i);
+		}
 		
 		this.symbolTable = new HashMap<String, Integer>();
 		this.labelMap = new HashMap<String, Integer>();
@@ -40,13 +39,22 @@ public class Process {
 				this.codeSegment = new Vector<Instruction>(codeSize);				
 			} else if (instruction.getCommand().compareTo("dataSize") == 0) {
 				int dataSize = Integer.parseInt(instruction.getOperand1());
-				this.dataSegment = new Vector<Integer>(dataSize);				
+				this.dataSegment = new Vector<Integer>(dataSize);
+				for (int i=0; i<dataSize; i++) {
+					this.dataSegment.add(i);
+				}
 			} else if (instruction.getCommand().compareTo("stackSize") == 0) {
 				int stackSize = Integer.parseInt(instruction.getOperand1());
 				this.stackSegment = new Vector<Integer>(stackSize);				
+				for (int i=0; i<stackSize; i++) {
+					this.stackSegment.add(i);
+				}
 			} else if (instruction.getCommand().compareTo("heapSize") == 0) {
 				int heapSize = Integer.parseInt(instruction.getOperand1());
 				this.heapSegment = new Vector<Integer>(heapSize);
+				for (int i=0; i<heapSize; i++) {
+					this.heapSegment.add(i);
+				}
 			}
 			instruction = new Instruction(scanner);
 		}		
@@ -67,35 +75,22 @@ public class Process {
 		}
 	}
 	
-	private Instruction parseOperand(Instruction instruction) {
-		String operand = instruction.getOperand1();
-		EOperand eOperand = null;
-		if (operand.charAt(0) == 'r') {
-			eOperand = EOperand.eRegister;
-			operand = operand.substring(1);
-		} else if (operand.charAt(0) == '@') {
-			eOperand = EOperand.eAddress;
-			operand = operand.substring(1);
-		} else {
-			eOperand = EOperand.eValue;
-		}
-
-		return instruction;
-	}
-	
 	private void parsePhaseII() {
 		for (Instruction instruction: this.codeSegment ) {
 			if (instruction.getCommand().compareTo("greaterThanEqual") == 0) {
 				int lineNO = this.labelMap.get(instruction.getOperand1());
-				instruction.setOperand1(EOperand.eValue, Integer.toString(lineNO));
+				instruction.setOperand1(Integer.toString(lineNO));
 			} else if (instruction.getCommand().compareTo("jump") == 0) {
 				int lineNO = this.labelMap.get(instruction.getOperand1());
-				instruction.setOperand1(EOperand.eValue, Integer.toString(lineNO));
+				instruction.setOperand1(Integer.toString(lineNO));
 			} else if (
 					instruction.getCommand().compareTo("move") == 0 ||
 					instruction.getCommand().compareTo("add") == 0 ||
-					instruction.getCommand().compareTo("subtract") == 0) {
-				this.parseOperand(instruction);
+					instruction.getCommand().compareTo("subtract") == 0 ||
+					instruction.getCommand().compareTo("load") == 0 ||
+					instruction.getCommand().compareTo("stoore") == 0)
+			{
+				
 			}
 		}		
 	}
@@ -122,19 +117,75 @@ public class Process {
 		Instruction instruction = this.codeSegment.get(this.PC);
 		instruction.println();
 		this.PC = this.PC+1;
-		if (instruction.getCommand().compareTo("halt") == 0) {
-			Interrupt interrupt = new Interrupt(Interrupt.EInterrupt.eProcessTerminated, this);
+		if (instruction.getCommand().compareTo("interrupt") == 0) {
+			Interrupt interrupt = null;
+			if (instruction.getOperand1().compareTo("halt") == 0) {
+				interrupt = new Interrupt(Interrupt.EInterrupt.eProcessTerminated, this);				
+			} else if (instruction.getOperand1().compareTo("readInt") == 0) {
+				///////////////
+				this.dataSegment.set(this.stackSegment.get(0), 3);
+				
+				interrupt = new Interrupt(Interrupt.EInterrupt.eReadStart, this);				
+			} else if (instruction.getOperand1().compareTo("writeInt") == 0) {
+				//////////////
+				System.out.println("Interrupt Write:" + this.dataSegment.get(this.stackSegment.get(0)));
+
+				interrupt = new Interrupt(Interrupt.EInterrupt.eWriteStart, this);				
+			} else {
+				System.out.println("interrupt:" + instruction.getOperand1() + " not supported");
+			}
 			interruptQueue.enqueue(interrupt);
-		}
+		} else if (instruction.getCommand().compareTo("load") == 0) {
+			this.registers.set(
+				Integer.parseInt(instruction.getOperand1().substring(1)),
+				this.dataSegment.get(Integer.parseInt(instruction.getOperand2()))				
+			);
+		} else if (instruction.getCommand().compareTo("store") == 0) {
+			this.dataSegment.set(
+				Integer.parseInt(instruction.getOperand1()),
+				this.registers.get(Integer.parseInt(instruction.getOperand2().substring(1)))
+			);
+		} else if (instruction.getCommand().compareTo("movec") == 0) {
+			this.registers.set(
+				Integer.parseInt(instruction.getOperand1().substring(1)),
+				Integer.parseInt(instruction.getOperand2())				
+			);
+		} else if (instruction.getCommand().compareTo("add") == 0) {
+			int index1 = Integer.parseInt(instruction.getOperand1().substring(1));			
+			int index2 = Integer.parseInt(instruction.getOperand2().substring(1));				
+			this.registers.set(index1, this.registers.get(index1) + this.registers.get(index2));
+		} else if (instruction.getCommand().compareTo("addc") == 0) {
+			int index1 = Integer.parseInt(instruction.getOperand1().substring(1));			
+			int value = Integer.parseInt(instruction.getOperand2());				
+			this.registers.set(index1, this.registers.get(index1) + value);
+		} else if (instruction.getCommand().compareTo("subtract") == 0) {
+			int index1 = Integer.parseInt(instruction.getOperand1().substring(1));			
+			int index2 = Integer.parseInt(instruction.getOperand2().substring(1));				
+			this.registers.set(index1, this.registers.get(index1) - this.registers.get(index2));
+			
+			if (this.registers.get(index1) < 0) {
+				this.bGreaterThanEqual = false;
+			} else {
+				this.bGreaterThanEqual = true;
+			}
+		} else if (instruction.getCommand().compareTo("jump") == 0) {
+			this.PC = Integer.parseInt(instruction.getOperand1());
+		} else if (instruction.getCommand().compareTo("greaterThanEqual") == 0) {
+			if (bGreaterThanEqual) {
+				this.PC = Integer.parseInt(instruction.getOperand1());
+			}
+		} else if (instruction.getCommand().compareTo("push") == 0) {
+			this.stackSegment.set(0, Integer.parseInt(instruction.getOperand1()));
+		} else {
+			System.out.println("instruction:" + instruction.getCommand() + " not supported");		}
+		
 	}
 	
 	private class Instruction {
 		private String[] tokens;
 		
 		private String command;
-		private EOperand eOperand1;
 		private String operand1;
-		private EOperand eOperand2;
 		private String operand2;
 		
 		public Instruction(Scanner scanner) {
@@ -153,36 +204,24 @@ public class Process {
 		}
 		
 		public void println() {
-			String line = new String();
-			for (String token: this.tokens) {
-				line = line + token;
-			}
-			System.out.println(line);
+			System.out.println(this.command+this.operand1+this.operand2);
 		}
 		
-		public void setOperand1(EOperand eOperand, String operand) {
-			this.eOperand1 = eOperand;
+		public void setOperand1(String operand) {
 			this.operand1 = operand;			
 		}
-		public void setOperand2(EOperand eOperand, String operand) {
-			this.eOperand2 = eOperand;
+		public void setOperand2(String operand) {
 			this.operand2 = operand;			
 		}
 		
 		public String getCommand() {
-			return command;
-		}
-		public EOperand getEOperand1() {
-			return eOperand1;
+			return this.command;
 		}
 		public String getOperand1() {
-			return operand1;
-		}
-		public EOperand getEOperand2() {
-			return eOperand2;
+			return this.operand1;
 		}
 		public String getOperand2() {
-			return operand2;
+			return this.operand2;
 		}		
 	}
 }

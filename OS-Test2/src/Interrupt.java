@@ -6,6 +6,8 @@ public class Interrupt {
 		eProcessTerminated,
 		eReadStart,
 		eReadTerminated,
+		eWriteStart,
+		eWriteTerminated,
 	} 
 		
 	private EInterrupt eInterrupt;

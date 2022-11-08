@@ -2,7 +2,7 @@
 .data
 codeSize 50
 dataSize 10
-stackSize 4
+stackSize 10
 heapSize 10
 .end
 
@@ -22,9 +22,10 @@ heapSize 10
 // writeInt(sum);
 
 .code
-store 0 0
-store 1 0
-move r0 2   
+movec r0 0
+store 0 r0
+store 1 r0
+push 2   
 interrupt readInt
 
 label while
@@ -33,22 +34,22 @@ load r1 2
 subtract r0 r1
 greaterThanEqual whileEnd
 
-move r0 3  
+push 3
 interrupt readInt
 
 load r0 1
-load r1 3 
+load r1 3
 add r0 r1
 store 1 r0
 
 load r0 0
-increment r1
+addc r0 1
 store 0 r0
 
 jump while
 label whileEnd
 
-move r0 1
+push 1
 interrupt writeInt
-halt
+interrupt halt
 .end
