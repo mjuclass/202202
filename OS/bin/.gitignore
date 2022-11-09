@@ -5,7 +5,7 @@
 /Process.class
 /Queue.class
 /QueueSynchronized.class
-/Scheduler$InterruptHandler.class
 /Scheduler.class
+/Scheduler$InterruptHandler.class
 /UI$Loader.class
 /UI.class

@@ -17,8 +17,8 @@ public class PMainFrame extends JFrame {
 	public PMainFrame() {
 		// attributes
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(size.width/2 - this.getWidth(), 20);
-		this.setSize(400,600);
+		this.setLocation(size.width/2 - this.getWidth(), 100);
+		this.setSize(1000,600);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		PLoginDialog loginDialog = new PLoginDialog(this);
