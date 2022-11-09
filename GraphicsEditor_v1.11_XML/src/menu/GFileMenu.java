@@ -19,7 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import frame.GDrawingPanel;
 import global.GConstants.EFileMenuItem;
-
+ 
 public class GFileMenu extends GMenu {
 	
 	private static final long serialVersionUID = 1L;
