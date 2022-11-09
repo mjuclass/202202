@@ -18,16 +18,16 @@ public class PMainFrame extends JFrame {
 		// attributes
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(size.width/2 - this.getWidth(), 20);
-		this.setSize(400,600);
+		this.setSize(1000,600);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		PLoginDialog loginDialog = new PLoginDialog(this);
 		loginDialog.setVisible(true);
-
+		
+		// components
 		LayoutManager layoutManager = new BorderLayout();
 		this.setLayout(layoutManager);
 		
-		// components
 		this.accountPanel = new PAccountPanel(this.vAccount);
 		this.add(this.accountPanel, BorderLayout.NORTH);
 		
