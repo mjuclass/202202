@@ -32,11 +32,11 @@
 		<eFillColor label = "채우기색" toolTipText = "새로운 파일을 생성" />
 	</EGraphicsMenuItem >
 	<EToolBarButton pathName = "resource">
-		<eSelect label = "선택도구" toolTipText = "새로운 파일을 생성" imageFileName = "select"/> 
-		<eRectangle label = "네모도구" toolTipText = "새로운 파일을 생성" imageFileName = "rectangle"/>
-		<eEllipse label = "원도구" toolTipText = "새로운 파일을 생성" imageFileName = "ellipse"/>
-		<eLine label = "라인도구" toolTipText = "새로운 파일을 생성" imageFileName = "line"/>
-		<ePolygon label = "다각형도구" toolTipText = "새로운 파일을 생성" imageFileName = "polygon"/>
-		<eTextArea label = "텍스트박스" toolTipText = "새로운 파일을 생성" imageFileName = "textArea"/>
+		<eSelect label = "선택도구" toolTipText = "선택도구" imageFileName = "select"/> 
+		<eRectangle label = "네모도구" toolTipText = "네모도구" imageFileName = "rectangle"/>
+		<eEllipse label = "원도구" toolTipText = "원도구" imageFileName = "ellipse"/>
+		<eLine label = "라인도구" toolTipText = "라인도구" imageFileName = "line"/>
+		<ePolygon label = "다각형도구" toolTipText = "다각형도구" imageFileName = "polygon"/>
+		<eTextArea label = "텍스트박스" toolTipText = "텍스트박스" imageFileName = "textArea"/>
 	</EToolBarButton>	
 </GConstants>
