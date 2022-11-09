@@ -1,6 +1,4 @@
-/CDirectory.class
 /EAccount.class
-/EDirectory.class
 /Main.class
 /PAccountPanel.class
 /PDirectoryPanel$PDirectoryTable.class
@@ -11,4 +9,3 @@
 /PSugangsincheongPanel.class
 /SLogin.class
 /VAccount.class
-/VDirectory.class

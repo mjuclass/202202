@@ -1,9 +1,12 @@
 /CDirectory.class
+/CLecture.class
 /EAccount.class
 /EDirectory.class
+/ELecture.class
 /Main.class
 /PAccountPanel.class
 /PDirectoryPanel$PDirectoryTable.class
+/PDirectoryPanel$PLectureTable.class
 /PDirectoryPanel.class
 /PLoginDialog$ActionHandler.class
 /PLoginDialog.class
@@ -12,3 +15,4 @@
 /SLogin.class
 /VAccount.class
 /VDirectory.class
+/VLecture.class
