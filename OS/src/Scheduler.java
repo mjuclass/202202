@@ -1,6 +1,3 @@
-import java.util.Vector;
-import java.util.concurrent.Semaphore;
-
 public class Scheduler extends Thread {
 	// component
 	private InterruptHandler interruptHandler;
