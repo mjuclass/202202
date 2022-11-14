@@ -77,7 +77,7 @@ public class PDirectoryPanel extends JPanel {
 
 		@Override
 		public void valueChanged(ListSelectionEvent event) {
-			System.out.println(event.getSource().toString());			
+			System.out.println(event.getSource().toString());
 		}
 		
 	}
