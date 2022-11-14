@@ -67,8 +67,8 @@ public class Process {
 	
 	private void parsePhaseI(Scanner scanner) {
 		String line = scanner.nextLine();
-		Instruction instruction = new Instruction(line);
 		while (scanner.hasNext()) {
+			Instruction instruction = new Instruction(line);
 			if (instruction.getCommand().compareTo("label") == 0) {
 				this.labelMap.put(
 					instruction.getOperand1(), 
@@ -113,15 +113,27 @@ public class Process {
 
 	public void executeInstruction(Queue<Interrupt> interruptQueue) {
 		Instruction instruction = this.codeList.get(this.PC);
-		System.out.println(
-				instruction.getCommand()
-				+instruction.getOperand1()
-				+instruction.getOperand2());
+		System.out.println(this.PC+": "
+				+ instruction.getCommand() + " "
+				+ instruction.getOperand1() + " "
+				+ instruction.getOperand2());
 		this.PC = PC +1;
 		if (instruction.getOperand1().compareTo("halt") == 0) {
 			Interrupt interrupt =
 					new Interrupt(Interrupt.EInterrupt.eProcessTerminated, this);
 			interruptQueue.enqueue(interrupt);
+		} else if (instruction.getCommand().compareTo("movec") == 0) {
+			int value = Integer.parseInt(instruction.getOperand2());
+			this.registers.set(
+					Integer.parseInt(instruction.getOperand1().substring(1)),
+					value
+			);
+		} else if (instruction.getCommand().compareTo("load") == 0) {
+			int value = this.dataSegment.get(Integer.parseInt(instruction.getOperand2()));
+			this.registers.set(
+					Integer.parseInt(instruction.getOperand1().substring(1)),
+					value
+			);
 		}
 	}
 	
