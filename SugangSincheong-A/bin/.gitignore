@@ -16,3 +16,7 @@
 /VAccount.class
 /VDirectory.class
 /VLecture.class
+/view/
+/entity/
+/service/
+/valueObject/

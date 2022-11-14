@@ -1,3 +1,4 @@
+package view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
@@ -10,6 +11,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import service.SLogin;
+import valueObject.VAccount;
 
 public class PLoginDialog extends JDialog {
 	private static final long serialVersionUID = 1L;

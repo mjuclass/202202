@@ -1,3 +1,4 @@
+package view;
 import java.awt.LayoutManager;
 import java.util.Vector;
 
@@ -6,6 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import service.SDirectory;
+import service.SLecture;
+import valueObject.VDirectory;
+import valueObject.VLecture;
 
 public class PDirectoryPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

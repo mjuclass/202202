@@ -1,3 +1,4 @@
+package valueObject;
 import java.util.Scanner;
 
 public class VDirectory {

@@ -1,3 +1,7 @@
+package service;
+
+import entity.EAccount;
+import valueObject.VAccount;
 
 public class SLogin {
 	private EAccount eAccount;

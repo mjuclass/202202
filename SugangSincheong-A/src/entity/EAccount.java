@@ -1,6 +1,9 @@
+package entity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import valueObject.VAccount;
 
 public class EAccount {
 	private String Id;
