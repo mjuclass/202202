@@ -30,7 +30,7 @@ public class GFileMenu extends GMenu {
  	
 	public GFileMenu() {
 		super(EFileMenuItem.values());
-	}
+	} 
 	
 	@Override
 	public void initialize(GDrawingPanel drawingPanel) {
