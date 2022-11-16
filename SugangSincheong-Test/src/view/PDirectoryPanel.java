@@ -65,30 +65,37 @@ public class PDirectoryPanel extends JPanel {
 			subPanel2.add(scrollPane);			
 		this.add(subPanel2);			
 
-		this.updateTable(null, 0);
+		this.updateTable(null);
 	}
 	
-	private void updateTable(Object object, int selectedRow) {
+	private void updateTable(Object object) {
 		String fileName = null;
+		int[] selectedIndices;;
 		if (object == null) {
-			fileName = "root";
-			fileName = this.campusTable.setData(fileName);
-			fileName = this.collegeTable.setData(fileName);
-			fileName = this.departmentTable.setData(fileName);
-			this.lectureTable.setData(fileName);			
+			fileName = this.campusTable.setData("root");
 		} else if (object == this.campusTable.getSelectionModel()) {
-			fileName = this.campusTable.getVDirectories().get(selectedRow).getFileName();
-			fileName = this.collegeTable.setData(fileName);
-			fileName = this.departmentTable.setData(fileName);
-			this.lectureTable.setData(fileName);			
+			selectedIndices = this.campusTable.getSelectedRows();
+			if (selectedIndices.length > 0) {
+				fileName = this.campusTable.getFileName(selectedIndices[0]);
+				fileName = this.collegeTable.setData(fileName);
+			}
 		} else if (object == this.collegeTable.getSelectionModel()) {			
-			fileName = this.collegeTable.getVDirectories().get(selectedRow).getFileName();
-			fileName = this.departmentTable.setData(fileName);
-			this.lectureTable.setData(fileName);			
+			selectedIndices = this.collegeTable.getSelectedRows();
+			if (selectedIndices.length > 0) {
+				fileName = this.collegeTable.getFileName(selectedIndices[0]);
+				fileName = this.departmentTable.setData(fileName);
+			}
 		} else if (object == this.departmentTable.getSelectionModel()) {			
-			fileName = this.departmentTable.getVDirectories().get(selectedRow).getFileName();
-			this.lectureTable.setData(fileName);			
+			selectedIndices = this.departmentTable.getSelectedRows();
+			if (selectedIndices.length > 0) {
+				fileName = this.departmentTable.getFileName(selectedIndices[0]);
+				this.lectureTable.setData(fileName);
+			}
 		} else if (object == this.lectureTable) {			
+			selectedIndices = this.lectureTable.getSelectedRows();
+			if (selectedIndices.length > 0) {
+				
+			}
 		}
 	}
 	
@@ -98,8 +105,7 @@ public class PDirectoryPanel extends JPanel {
 		public void valueChanged(ListSelectionEvent event) {
 			if (!event.getValueIsAdjusting()) {
 				System.out.println(event.getSource().toString());
-				int selectedRow = event.getLastIndex();
-				updateTable(event.getSource(), selectedRow);
+				updateTable(event.getSource());
 			}
 		}
 		
@@ -118,10 +124,9 @@ public class PDirectoryPanel extends JPanel {
 			this.tableModel = new DefaultTableModel(header, 0);
 			this.setModel(this.tableModel);			
 		}
-		public Vector<VDirectory> getVDirectories() {
-			return this.vDirectories;
+		public String getFileName(int index) {
+			return this.vDirectories.get(index).getFileName();
 		}
-		
 		public String setData(String fileName) {
 			this.sDirectory = new SDirectory();
 			this.vDirectories = sDirectory.getDirectories(fileName);
@@ -132,7 +137,7 @@ public class PDirectoryPanel extends JPanel {
 				row.add(vDirectory.getName());
 				this.tableModel.addRow(row);		
 			}
-//			this.setRowSelectionInterval(0, 0);
+			this.setRowSelectionInterval(0, 0);
 			return vDirectories.get(0).getFileName();
 		}
 	}
@@ -153,9 +158,6 @@ public class PDirectoryPanel extends JPanel {
 			header.add("Test");
 			this.tableModel = new DefaultTableModel(header, 0);
 			this.setModel(this.tableModel);			
-		}
-		public Vector<VLecture> getVLectures() {
-			return this.vLectures;
 		}
 		
 		public void setData(String fileName) {
