@@ -6,9 +6,10 @@ import java.util.Vector;
 public class Process {
 	// CPU
 	private static final int MAX_REGISTERS = 10;
-	private int PC;
-	private int codeSize, dataSize, stackSize, heapSize;
+	
+	private int PC;	
 	private Vector<Integer> registers;
+	private int codeSize, dataSize, stackSize, heapSize;
 	
 	// Memory
 	private Vector<Instruction> codeList;
