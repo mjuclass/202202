@@ -9,9 +9,14 @@ public class SLogin {
 		this.eAccount = new EAccount();
 	}
 
-	public VAccount login(String id) {
+	public VAccount login(String id, char[] password) {
 		VAccount vAccount = this.eAccount.getAccount(id);
-		return vAccount;
+		if (vAccount != null) {
+			if (vAccount.getPassword().compareTo(String.valueOf(password)) == 0) {
+				return vAccount;
+			}
+		}
+		return null;
 	}
 
 }

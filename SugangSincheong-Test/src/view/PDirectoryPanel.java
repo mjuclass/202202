@@ -104,7 +104,7 @@ public class PDirectoryPanel extends JPanel {
 		@Override
 		public void valueChanged(ListSelectionEvent event) {
 			if (!event.getValueIsAdjusting()) {
-				System.out.println(event.getSource().toString());
+//				System.out.println(event.getSource().toString());
 				updateTable(event.getSource());
 			}
 		}

@@ -80,7 +80,7 @@ public class GFileMenu extends GMenu {
 			if (reply == JOptionPane.OK_OPTION) {
 				bCancel = this.save();
 			}
-		}
+		} 
 		return bCancel; 
 	}
 	
