@@ -64,25 +64,51 @@ public class PDirectoryPanel extends JPanel {
 			scrollPane.setViewportView(this.lectureTable);
 			subPanel2.add(scrollPane);			
 		this.add(subPanel2);
-
-			
-
-		String fileName = "root";
-		fileName = this.campusTable.setData(fileName);
-		fileName = this.collegeTable.setData(fileName);
-		fileName = this.departmentTable.setData(fileName);
-		this.lectureTable.setData(fileName);
+		
+		this.updateTable(null, 0);
 	}
+	
+	private void updateTable(Object object, int selectedIndex) {
+		String fileName = null;
+		if (object == null) {
+			fileName = "root";
+			fileName = this.campusTable.setData(fileName);
+			fileName = this.collegeTable.setData(fileName);
+			fileName = this.departmentTable.setData(fileName);
+			this.lectureTable.setData(fileName);
+		} else if (object == this.campusTable.getSelectionModel()) {
+			fileName = this.campusTable.getVDirectories().get(selectedIndex).getFileName();
+			fileName = this.collegeTable.setData(fileName);
+			fileName = this.departmentTable.setData(fileName);
+			this.lectureTable.setData(fileName);
+		} else if (object == this.collegeTable.getSelectionModel()) {
+			fileName = this.collegeTable.getVDirectories().get(selectedIndex).getFileName();
+			fileName = this.departmentTable.setData(fileName);
+			this.lectureTable.setData(fileName);
+		} else if (object == this.departmentTable.getSelectionModel()) {
+			fileName = this.departmentTable.getVDirectories().get(selectedIndex).getFileName();
+			this.lectureTable.setData(fileName);
+		} else if (object == this.lectureTable.getSelectionModel()) {
+			
+		}
+	}
+	
 	private class ListSelectionHandler implements ListSelectionListener {
 
 		@Override
 		public void valueChanged(ListSelectionEvent event) {
-			System.out.println(event.getSource().toString());
+			if (!event.getValueIsAdjusting()) {				
+				System.out.println(event.getSource().toString());
+				int rowIndex = event.getLastIndex();
+				updateTable(event.getSource(), rowIndex);
+			} else {
+			}
 		}
 		
 	}
 	private class PDirectory extends JTable {
 		private static final long serialVersionUID = 1L;
+		private Vector<VDirectory> vDirectories;
 		
 		private DefaultTableModel tableModel;
 		public PDirectory() {
@@ -92,17 +118,21 @@ public class PDirectoryPanel extends JPanel {
 			this.setModel(this.tableModel);
 			
 		}
+		public Vector<VDirectory> getVDirectories() {
+			return this.vDirectories;
+		}
 		
 		public String setData(String fileName) {
 			SDirectory sDirectory = new SDirectory();
-			Vector<VDirectory> vDirectories = sDirectory.getDirectories(fileName);
+			this.vDirectories = sDirectory.getDirectories(fileName);
 
-			for (VDirectory vDirectory: vDirectories) {
+			this.tableModel.setNumRows(0);
+			for (VDirectory vDirectory: this.vDirectories) {
 				Vector<String> row = new Vector<String>();
 				row.add(vDirectory.getName());
 				this.tableModel.addRow(row);		
 			}
-			this.setRowSelectionInterval(0, 0);
+//			this.setRowSelectionInterval(0, 0);
 			return vDirectories.get(0).getFileName();
 		}
 	}
@@ -126,6 +156,7 @@ public class PDirectoryPanel extends JPanel {
 			SLecture sLecture = new SLecture();
 			Vector<VLecture> vLectures = sLecture.getLectures(fileName);
 
+			this.tableModel.setNumRows(0);
 			for (VLecture vLecture: vLectures) {				
 				Vector<String> row = new Vector<String>();
 				row.add(vLecture.getId());

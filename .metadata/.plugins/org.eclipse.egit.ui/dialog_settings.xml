@@ -11,9 +11,11 @@
 	</list>
 	<list key="CommitDialog.authorValues">
 		<item value="mjuclass &lt;mjuclass@users.noreply.github.com&gt;"/>
+		<item value="user &lt;user@DESKTOP-OG399DS&gt;"/>
 	</list>
 	<list key="CommitDialog.committerValues">
 		<item value="mjuclass &lt;mjuclass@users.noreply.github.com&gt;"/>
+		<item value="user &lt;user@DESKTOP-OG399DS&gt;"/>
 	</list>
 	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
 		<item key="MAIN_SASH_FORM_ORIENTATION_VERTICAL" value="false"/>
@@ -22,22 +24,13 @@
 		<item key="sortItemState" value="false"/>
 	</section>
 	<section name="GitCommitMessageComponent">
-		<list key="C:\Users\chois\Source\java\classes\classes-202202\.git">
-			<item value="false"/>
-			<item value="mjuclass &lt;mjuclass@users.noreply.github.com&gt;"/>
-			<item value="1"/>
-			<item value="mjuclass &lt;mjuclass@users.noreply.github.com&gt;"/>
-			<item value="da96f3210a477fc6dcb1dd582913c4c65f9f4898"/>
-			<item value="0"/>
-			<item value="false"/>
-		</list>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="698"/>
 		<item key="DIALOG_Y_ORIGIN" value="142"/>
-		<item key="DIALOG_WIDTH" value="666"/>
-		<item key="DIALOG_HEIGHT" value="458"/>
-		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
+		<item key="DIALOG_WIDTH" value="700"/>
+		<item key="DIALOG_HEIGHT" value="503"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
 		<list key="sashWeights">
 			<item value="600"/>
 			<item value="400"/>
@@ -49,5 +42,26 @@
 		<item key="DIALOG_WIDTH" value="387"/>
 		<item key="DIALOG_HEIGHT" value="380"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.fetch.FetchResultDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="631"/>
+		<item key="DIALOG_Y_ORIGIN" value="245"/>
+		<item key="DIALOG_WIDTH" value="700"/>
+		<item key="DIALOG_HEIGHT" value="503"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.dialogs.MergeTargetSelectionDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="670"/>
+		<item key="DIALOG_Y_ORIGIN" value="102"/>
+		<item key="DIALOG_WIDTH" value="538"/>
+		<item key="DIALOG_HEIGHT" value="672"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.merge.MergeResultDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="772"/>
+		<item key="DIALOG_Y_ORIGIN" value="404"/>
+		<item key="DIALOG_WIDTH" value="334"/>
+		<item key="DIALOG_HEIGHT" value="219"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
 	</section>
 </section>
