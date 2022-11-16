@@ -2,4 +2,5 @@ INDEX VERSION 1.131+C:\Users\user\Documents\강의자료_2022_최성운\git\202202\.met
 3770422834.index
 2041923464.index
 1865797976.index
+1781747251.index
 526671170.index
