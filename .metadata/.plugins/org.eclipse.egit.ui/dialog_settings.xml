@@ -39,9 +39,9 @@
 	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="746"/>
 		<item key="DIALOG_Y_ORIGIN" value="365"/>
-		<item key="DIALOG_WIDTH" value="387"/>
-		<item key="DIALOG_HEIGHT" value="380"/>
-		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+		<item key="DIALOG_WIDTH" value="475"/>
+		<item key="DIALOG_HEIGHT" value="429"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.fetch.FetchResultDialog.dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="631"/>
@@ -53,15 +53,15 @@
 	<section name="org.eclipse.egit.ui.internal.dialogs.MergeTargetSelectionDialog.dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="670"/>
 		<item key="DIALOG_Y_ORIGIN" value="102"/>
-		<item key="DIALOG_WIDTH" value="538"/>
-		<item key="DIALOG_HEIGHT" value="672"/>
-		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
+		<item key="DIALOG_WIDTH" value="706"/>
+		<item key="DIALOG_HEIGHT" value="854"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.merge.MergeResultDialog.dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="772"/>
 		<item key="DIALOG_Y_ORIGIN" value="404"/>
-		<item key="DIALOG_WIDTH" value="334"/>
-		<item key="DIALOG_HEIGHT" value="219"/>
-		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
+		<item key="DIALOG_WIDTH" value="460"/>
+		<item key="DIALOG_HEIGHT" value="293"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
 	</section>
 </section>
