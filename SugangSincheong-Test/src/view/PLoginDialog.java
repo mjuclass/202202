@@ -1,9 +1,10 @@
 package view;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.LayoutManager;
 import java.awt.Toolkit;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -16,55 +17,63 @@ import valueObject.VAccount;
 import view.Main.ActionHandler;
 
 public class PLoginDialog extends JDialog {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
 
-	private JTextField tfId;
-	private JPasswordField tfPassword;
-	private JButton okButton, cancelButton;
+	private JTextField textFieldId;
+	private JPasswordField passwordFieldPassword;
+	private JButton buttonOK, buttonCancel;
 	private SLogin sLogin;
 	
 	public PLoginDialog(Frame parent, ActionHandler actionHandler) {
-		super(parent, "Login");
+		super(parent, Constants.LoginDialog.LABEL_TITLE);
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(size.width/2 - this.getWidth(), 100);
-		this.setSize(300,200);
+		this.setLocation(size.width/2 - Constants.LoginDialog.WIDTH/2, Constants.LoginDialog.Y);
+		this.setSize(Constants.LoginDialog.WIDTH, Constants.LoginDialog.HIGHT);
 		this.setModal(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
-		FlowLayout layoutManager = new FlowLayout(FlowLayout.CENTER, 0, 5);
+		LayoutManager layoutManager = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
 		this.setLayout(layoutManager);
 		
-		JPanel idPanel = new JPanel();		
-			JLabel lbId=new JLabel("  아이디 ");    
-			idPanel.add(lbId);
+		JPanel panelHeader = new JPanel();
+		panelHeader.setSize(10,10);
+		this.add(panelHeader);
+		
+		JPanel panelID = new JPanel();		
+			JLabel labelId = new JLabel(Constants.LoginDialog.LABEL_ID);
+			panelID.add(labelId);
 			 		
-			this.tfId = new JTextField();
-			this.tfId.setColumns(10);
-			idPanel.add(tfId);		
-		this.add(idPanel);
+			this.textFieldId = new JTextField();
+			this.textFieldId.setColumns(Constants.LoginDialog.SIZE_COLUMN_ID);
+			panelID.add(textFieldId);		
+		this.add(panelID);
 		
-		JPanel passwordPanel = new JPanel();		
-			JLabel lbPassword =new JLabel("비밀번호");    
-			passwordPanel.add(lbPassword);
+		JPanel panelPassword = new JPanel();		
+			JLabel lbPassword =new JLabel(Constants.LoginDialog.LABEL_PASSWORD);    
+			panelPassword.add(lbPassword);
 			
-			this.tfPassword = new JPasswordField();   
-			this.tfPassword.setColumns(10);
-			passwordPanel.add(tfPassword);
-		this.add(passwordPanel);
+			this.passwordFieldPassword = new JPasswordField();   
+			this.passwordFieldPassword.setColumns(Constants.LoginDialog.SIZE_COLUMN_PASSWORD);
+			panelPassword.add(passwordFieldPassword);
+		this.add(panelPassword);
 		
 		
-		JPanel commandPanel = new JPanel();		
-			this.okButton = new JButton("OK");    
-			this.okButton.addActionListener(actionHandler);
-			this.getRootPane().setDefaultButton(this.okButton);
-			commandPanel.add(this.okButton);
+		JPanel panelCommand = new JPanel();		
+			this.buttonOK = new JButton(Constants.LABEL_OK);    
+			this.buttonOK.addActionListener(actionHandler);
+			this.getRootPane().setDefaultButton(this.buttonOK);
+			panelCommand.add(this.buttonOK);
 			
-			this.cancelButton = new JButton("Cancel");    
-			this.cancelButton.addActionListener(actionHandler);
-			commandPanel.add(this.cancelButton);			
-		this.add(commandPanel);
+			this.buttonCancel = new JButton(Constants.LABEL_CANCEL);    
+			this.buttonCancel.addActionListener(actionHandler);
+			panelCommand.add(this.buttonCancel);			
+		this.add(panelCommand);
 		
+		JPanel paenlFooter = new JPanel();
+		paenlFooter.setSize(10,10);
+		this.add(paenlFooter);
+
 		this.sLogin = new SLogin();
 	}
 	
@@ -74,9 +83,9 @@ public class PLoginDialog extends JDialog {
 	
 	public VAccount getAccount(Object object) {
 		VAccount vAccount = null;
-		if (object == this.okButton) {
-			String id = this.tfId.getText();
-			char[] password = this.tfPassword.getPassword();
+		if (object == this.buttonOK) {
+			String id = this.textFieldId.getText();
+			char[] password = this.passwordFieldPassword.getPassword();
 			vAccount = this.sLogin.login(id, password);
 		} else {
 		}
