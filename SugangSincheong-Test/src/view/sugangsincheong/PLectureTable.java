@@ -1,4 +1,4 @@
-package view;
+package view.sugangsincheong;
 
 import java.util.Vector;
 
@@ -13,22 +13,27 @@ public class PLectureTable extends JTable {
 	
 	private SLecture sLecture;
 	private Vector<VLecture> vLectures;
+	private String directoryName;
 	
 	private DefaultTableModel tableModel;
-	public PLectureTable() {
+	public PLectureTable(String directoryName) {
+		this.directoryName = directoryName;
+		
+		this.sLecture = new SLecture();
+		this.vLectures = sLecture.getLectures(directoryName+"header");
+		
 		Vector<String> header = new Vector<String>();
-		header.add("Test");
-		header.add("Test");
-		header.add("Test");
-		header.add("Test");
-		header.add("Test");
+		header.add(this.vLectures.get(0).getId());
+		header.add(this.vLectures.get(0).getName());
+		header.add(this.vLectures.get(0).getProfessor());
+		header.add(this.vLectures.get(0).getCredit());
+		header.add(this.vLectures.get(0).getTime());
 		this.tableModel = new DefaultTableModel(header, 0);
 		this.setModel(this.tableModel);			
 	}
 	
 	public void setData(String fileName) {
-		this.sLecture = new SLecture();
-		this.vLectures = sLecture.getLectures(fileName);
+		this.vLectures = sLecture.getLectures(directoryName+fileName);
 
 		this.tableModel.setNumRows(0);
 		for (VLecture vLecture: vLectures) {				

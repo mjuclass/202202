@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import valueObject.VAccount;
+import view.sugangsincheong.PSugangsincheongPanel;
 
 public class PMainFrame extends JFrame {
 	private static final long serialVersionUID = Constants.SERIAL_VERSION_UID;
