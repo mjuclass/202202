@@ -136,23 +136,4 @@ public class PDirectoryPanel extends JPanel {
 			return vDirectories.get(0).getFileName();
 		}
 	}
-	
-
-<<<<<<< HEAD
-			this.tableModel.setNumRows(0);
-			for (VLecture vLecture: vLectures) {				
-				Vector<String> row = new Vector<String>();
-				row.add(vLecture.getId());
-				row.add(vLecture.getName());
-				row.add(vLecture.getProfessor());
-				row.add(vLecture.getCredit());
-				row.add(vLecture.getTime());
-
-				this.tableModel.addRow(row);		
-			}
-			this.setRowSelectionInterval(0, 0);
-		}
-	}
-=======
->>>>>>> branch 'master' of https://github.com/mjuclass/202202.git
 }

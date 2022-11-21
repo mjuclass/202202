@@ -17,11 +17,11 @@ public class Main {
 	}
 	
 	private void run() {
-		VAccount account = this.loginDialog.login();
-		if (account != null) {
-			PMainFrame mainFrame = new PMainFrame();
-			mainFrame.initialize();			
-		}		
+//		VAccount account = this.loginDialog.login();
+//		if (account != null) {
+//			PMainFrame mainFrame = new PMainFrame();
+//			mainFrame.initialize();			
+//		}		
 	}
 	private void finish() {
 	}
