@@ -3,6 +3,7 @@ import java.awt.LayoutManager;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class PSugangsincheongPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -23,14 +24,18 @@ public class PSugangsincheongPanel extends JPanel {
 		this.controlPanel1 = new PControlPanel();
 		this.add(this.controlPanel1);
 		
+		JScrollPane scrollPane = new JScrollPane();
 		this.miridamgiPanel = new PMiridamgiPanel();
-		this.add(this.miridamgiPanel);
+		scrollPane.setViewportView(this.miridamgiPanel);
+		this.add(scrollPane);
 		
 		this.controlPanel2 = new PControlPanel();
 		this.add(this.controlPanel2);
 		
+		scrollPane = new JScrollPane();
 		this.sincheongPanel = new PSincheongPanel();
-		this.add(this.sincheongPanel);
+		scrollPane.setViewportView(this.sincheongPanel);
+		this.add(scrollPane);
 		
 	}
 }
