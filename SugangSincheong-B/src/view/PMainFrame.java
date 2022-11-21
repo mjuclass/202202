@@ -24,8 +24,6 @@ public class PMainFrame extends JFrame {
 		this.setSize(1000,600);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		PLoginDialog loginDialog = new PLoginDialog(this);
-		loginDialog.setVisible(true);
 
 		LayoutManager layoutManager = new BorderLayout();
 		this.setLayout(layoutManager);
@@ -37,5 +35,9 @@ public class PMainFrame extends JFrame {
 		this.sugangsincheongPanel = new PSugangsincheongPanel();
 		this.add(sugangsincheongPanel, BorderLayout.CENTER);
 		
+	}
+
+	public void initialize() {
+		this.setVisible(true);
 	}
 }
