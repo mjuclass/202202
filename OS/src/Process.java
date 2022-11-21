@@ -6,9 +6,13 @@ import java.util.Vector;
 public class Process {
 	// CPU
 	private static final int MAX_REGISTERS = 10;
-	private int PC;
-	private int codeSize, dataSize, stackSize, heapSize;
+	
+	private int PC;	
 	private Vector<Integer> registers;
+	private boolean bGreaterThan;
+	private boolean bEqual;
+	
+	private int codeSize, dataSize, stackSize, heapSize;
 	
 	// Memory
 	private Vector<Instruction> codeList;
@@ -20,6 +24,9 @@ public class Process {
 	private Map<String, String> labelMap;
 	 
 	public Process() {
+		this.bEqual = false;
+		this.bGreaterThan = false;
+		
 		this.registers = new Vector<Integer>();
 		for (int i=0; i<MAX_REGISTERS; i++) {
 			this.registers.add(i);
@@ -122,18 +129,41 @@ public class Process {
 			Interrupt interrupt =
 					new Interrupt(Interrupt.EInterrupt.eProcessTerminated, this);
 			interruptQueue.enqueue(interrupt);
-		} else if (instruction.getCommand().compareTo("movec") == 0) {
-			int value = Integer.parseInt(instruction.getOperand2());
-			this.registers.set(
-					Integer.parseInt(instruction.getOperand1().substring(1)),
-					value
-			);
 		} else if (instruction.getCommand().compareTo("load") == 0) {
 			int value = this.dataSegment.get(Integer.parseInt(instruction.getOperand2()));
-			this.registers.set(
-					Integer.parseInt(instruction.getOperand1().substring(1)),
-					value
-			);
+			this.registers.set(Integer.parseInt(instruction.getOperand1().substring(1)), value);
+		} else if (instruction.getCommand().compareTo("store") == 0) {
+			int value = this.registers.get(Integer.parseInt(instruction.getOperand2().substring(1)));
+			this.dataSegment.set(Integer.parseInt(instruction.getOperand1()), value);
+		} else if (instruction.getCommand().compareTo("movec") == 0) {
+			int value = Integer.parseInt(instruction.getOperand2());
+			this.registers.set(Integer.parseInt(instruction.getOperand1().substring(1)), value);
+		} else if (instruction.getCommand().compareTo("move") == 0) {
+			int value = this.registers.get(Integer.parseInt(instruction.getOperand2().substring(1)));
+			this.registers.set(Integer.parseInt(instruction.getOperand1().substring(1)), value);
+		} else if (instruction.getCommand().compareTo("add") == 0) {
+			int value1 = this.registers.get(Integer.parseInt(instruction.getOperand1().substring(1)));
+			int value2 = this.registers.get(Integer.parseInt(instruction.getOperand2().substring(1)));
+			this.registers.set(Integer.parseInt(instruction.getOperand1().substring(1)), value1+value2);
+		} else if (instruction.getCommand().compareTo("addc") == 0) {
+			int value1 = this.registers.get(Integer.parseInt(instruction.getOperand1().substring(1)));
+			int value2 = Integer.parseInt(instruction.getOperand2());
+			this.registers.set(Integer.parseInt(instruction.getOperand1().substring(1)), value1+value2);
+		} else if (instruction.getCommand().compareTo("subtract") == 0) {
+			int value1 = this.registers.get(Integer.parseInt(instruction.getOperand1().substring(1)));
+			int value2 = this.registers.get(Integer.parseInt(instruction.getOperand2().substring(1)));
+			this.registers.set(Integer.parseInt(instruction.getOperand1().substring(1)), value1-value2);
+			if (value1 == value2) { this.bEqual = true; }
+			if (value1 > value2 ) { this.bGreaterThan = true; }
+		} else if (instruction.getCommand().compareTo("jump") == 0) {
+			this.PC = Integer.parseInt(instruction.getOperand1());
+		} else if (instruction.getCommand().compareTo("greaterThanEqual") == 0) {
+			if (this.bEqual || this.bGreaterThan) {
+				String label = instruction.getOperand1();
+				this.PC = Integer.parseInt(instruction.getOperand1());
+			}
+		} else if (instruction.getCommand().compareTo("interrupt") == 0) {
+
 		}
 	}
 	

@@ -137,25 +137,8 @@ public class PDirectoryPanel extends JPanel {
 		}
 	}
 	
-	private class PLectureTable extends JTable {
-		private static final long serialVersionUID = 1L;
-		
-		private DefaultTableModel tableModel;
-		public PLectureTable() {
-			Vector<String> header = new Vector<String>();
-			header.add("Test");
-			header.add("Test");
-			header.add("Test");
-			header.add("Test");
-			header.add("Test");
-			this.tableModel = new DefaultTableModel(header, 0);
-			this.setModel(this.tableModel);			
-		}
-		
-		public void setData(String fileName) {
-			SLecture sLecture = new SLecture();
-			Vector<VLecture> vLectures = sLecture.getLectures(fileName);
 
+<<<<<<< HEAD
 			this.tableModel.setNumRows(0);
 			for (VLecture vLecture: vLectures) {				
 				Vector<String> row = new Vector<String>();
@@ -170,4 +153,6 @@ public class PDirectoryPanel extends JPanel {
 			this.setRowSelectionInterval(0, 0);
 		}
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/mjuclass/202202.git
 }

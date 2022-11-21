@@ -137,6 +137,7 @@ public class PDirectoryPanel extends JPanel {
 		}
 	}
 	
+<<<<<<< HEAD
 	private class PLectureTable extends JTable {
 		private static final long serialVersionUID = 1L;
 		
@@ -176,4 +177,6 @@ public class PDirectoryPanel extends JPanel {
 			this.setRowSelectionInterval(0, 0);
 		}
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/mjuclass/202202.git
 }
