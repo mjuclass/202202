@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import service.SLogin;
 import valueObject.VAccount;
+import view.Main.ActionHandler;
 
 public class PLoginDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
@@ -23,12 +24,10 @@ public class PLoginDialog extends JDialog {
 	
 	private SLogin sLogin;
 	
-	public PLoginDialog(Frame parent) {
-		super(parent, "Login");
-		this.setLocation(parent.getX(), parent.getY());
+	public PLoginDialog(ActionHandler actionHandler) {
+		this.setLocation(100, 100);
 		this.setSize(200,200);
-		this.setModal(true);
-		
+		this.setModal(true);		
 		
 		LayoutManager layoutManager = new FlowLayout();
 		this.setLayout(layoutManager);
@@ -51,7 +50,6 @@ public class PLoginDialog extends JDialog {
 		JButton btLogin = new JButton("Login");    
 		this.add(btLogin,BorderLayout.SOUTH);
 		
-		ActionHandler actionHandler = new ActionHandler();
 		btLogin.addActionListener(actionHandler);
 		
 		this.sLogin = new SLogin();
@@ -66,10 +64,4 @@ public class PLoginDialog extends JDialog {
 		this.dispose();
 	}
 	
-	class ActionHandler implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			login();
-		}		
-	}
 }
