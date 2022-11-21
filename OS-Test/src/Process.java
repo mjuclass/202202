@@ -43,7 +43,7 @@ public class Process {
 	}
 	public void finish() {
 	}
-	
+
 	
 	private void parseData (Scanner scanner) {
 		String command = scanner.next();
@@ -162,8 +162,10 @@ public class Process {
 				String label = instruction.getOperand1();
 				this.PC = Integer.parseInt(instruction.getOperand1());
 			}
+		} else if (instruction.getCommand().compareTo("push") == 0) {
+			this.push(Integer.parseInt(instruction.getOperand1()));
 		} else if (instruction.getCommand().compareTo("interrupt") == 0) {
-
+			Interrupt interrupt = new Innterupt(instruction.getOperand1(), this);
 		}
 	}
 	

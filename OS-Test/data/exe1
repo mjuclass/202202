@@ -26,7 +26,7 @@ movec r0 0
 store 0 r0
 store 1 r0
 push 2   
-interrupt readInt
+interrupt eRead
 
 label while
 load r0 0
@@ -35,7 +35,7 @@ subtract r0 r1
 greaterThanEqual whileEnd
 
 push 3
-interrupt readInt
+interrupt eRead
 
 load r0 1
 load r1 3
@@ -50,6 +50,6 @@ jump while
 label whileEnd
 
 push 1
-interrupt writeInt
-interrupt halt
+interrupt eWrite
+interrupt eHalt
 .end

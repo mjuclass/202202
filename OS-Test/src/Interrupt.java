@@ -4,15 +4,18 @@ public class Interrupt {
 		eTimeOut,
 		eProcessStart,
 		eProcessTerminated,
-		eReadStart,
+		eRead,
 		eReadTerminated,
+		eWrite,
+		eWriteTerminated,
+		eHalt
 	}
 		
 	private EInterrupt eInterrupt;
 	private Process process;
 	
-	public Interrupt(EInterrupt eInterrupt, Process process) {
-		this.eInterrupt = eInterrupt;
+	public Interrupt(String sInterrupt, Process process) {
+		this.eInterrupt = EInterrupt.valueOf(sInterrupt)
 		this.process = process;
 	}
 	public EInterrupt geteInterrupt() {return eInterrupt;}
