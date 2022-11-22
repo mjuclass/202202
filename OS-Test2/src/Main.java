@@ -9,10 +9,8 @@ public class Main {
 
 	private void run() {
 		Queue<Interrupt> interruptQueue = new QueueSynchronized<Interrupt>();
-		Queue<Interrupt> fileIOCommandQueue = new QueueSynchronized<Interrupt>();
 		
-		Scheduler scheduler = new Scheduler(
-				interruptQueue, fileIOCommandQueue);
+		Scheduler scheduler = new Scheduler(interruptQueue);
 		scheduler.start();
 		
 		UI ui = new UI(interruptQueue);		
