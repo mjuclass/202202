@@ -93,6 +93,12 @@ public class PDirectoryPanel extends JPanel {
 		}
 	}
 	
+	public Vector<VLecture> getSelectedLectures() {
+		return null;
+	}
+	public void addLectures(Vector<VLecture> lectures) {
+	}
+
 	private class ListSelectionHandler implements ListSelectionListener {
 
 		@Override

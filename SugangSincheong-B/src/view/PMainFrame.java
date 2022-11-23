@@ -17,13 +17,14 @@ public class PMainFrame extends JFrame {
 	private VAccount vAccount;	
 	public void setVAccount(VAccount vAccount) { this.vAccount = vAccount; }
 	
-	public PMainFrame() {
+	public PMainFrame(VAccount vAccount) {
 		// attributes
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(size.width/2 - this.getWidth(), 100);
 		this.setSize(1000,600);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+		this.vAccount = vAccount;
 
 		LayoutManager layoutManager = new BorderLayout();
 		this.setLayout(layoutManager);

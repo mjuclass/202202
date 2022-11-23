@@ -3,23 +3,28 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import valueObject.VAccount;
+
 public class Main {
 	private PLoginDialog loginDialog;
+	
 	public Main() {
 		
 	}
 	public void initialize() {
 		ActionHandler actionHandler = new ActionHandler();
 
-		PLoginDialog loginDialog = new PLoginDialog(actionHandler);
-		loginDialog.setVisible(true);		
+		this.loginDialog = new PLoginDialog(actionHandler);
+		this.loginDialog.setVisible(true);		
 	}
 	public void run() {
-//		Account account = this.loginDialog.login();
-//		if (account != null) {
-//			MainFrame mainfFrmae = new MainFrame();
-//			mainfFrmae.intitialize();
-//		}
+		VAccount vAccount = loginDialog.login();
+		loginDialog.dispose();
+		
+		if (vAccount != null) {
+			PMainFrame mainFrame = new PMainFrame(vAccount);
+			mainFrame.initialize();
+		}
 	}
 	public void finish() {
 		
@@ -35,12 +40,6 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 		main.initialize();
-		main.run();
-		main.finish();	
-		
-//		PMainFrame mainFrame = new PMainFrame();
-//		mainFrame.initialize();
-//		mainFrame.run();
-//		mainFrame.finish();	
+//		main.finish();	
 	}
 }

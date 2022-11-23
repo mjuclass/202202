@@ -55,13 +55,10 @@ public class PLoginDialog extends JDialog {
 		this.sLogin = new SLogin();
 	}
 	
-	void login() {
+	public VAccount login() {
 		String id = this.tfId.getText();
 		char[] password = this.tfPassword.getPassword();
-		VAccount vAccount = this.sLogin.login(id);
-		PMainFrame mainFrame = (PMainFrame)this.getParent();
-		mainFrame.setVAccount(vAccount);
-		this.dispose();
+		return this.sLogin.login(id);
 	}
 	
 }

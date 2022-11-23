@@ -92,6 +92,14 @@ public class PDirectoryPanel extends JPanel {
 		}
 	}
 	
+	public Vector<VLecture> getSelectedLectures() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void addLectures(Vector<VLecture> vLectures) {
+		// TODO Auto-generated method stub
+		
+	}
 	private class ListSelectionHandler implements ListSelectionListener {
 
 		@Override
@@ -101,8 +109,7 @@ public class PDirectoryPanel extends JPanel {
 				int selectedRow = event.getLastIndex();
 				updateTable(event.getSource(), selectedRow);
 			}
-		}
-		
+		}		
 	}
 	private class PDirectory extends JTable {
 		private static final long serialVersionUID = 1L;
@@ -136,5 +143,7 @@ public class PDirectoryPanel extends JPanel {
 			return vDirectories.get(0).getFileName();
 		}
 	}
+
+
 }
 
