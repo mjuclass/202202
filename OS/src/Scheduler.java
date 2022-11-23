@@ -59,12 +59,24 @@ public class Scheduler extends Thread {
 			runningProcess = null;
 		}
 		private void HandleReadStart(Process process) {
-//			getWaitQueue().enqueue(runningProcess);
-//			runningProcess = getReadyQueue().dequeue();
+			// io start
+			waitQueue.enqueue(runningProcess);
+			runningProcess = readyQueue.dequeue();
 		}
 		private void HandleReadTerminated(Process process) {
-//			getReadyQueue().enqueue(process);
+//			waitQueue.dequeue(process);
+			readyQueue.enqueue(process);
 		}
+		private void HandleWriteStart(Process process) {
+			// io start
+			waitQueue.enqueue(runningProcess);
+			runningProcess = readyQueue.dequeue();
+		}
+		private void HandleWriteTerminated(Process process) {
+//			waitQueue.dequeue(process);
+			readyQueue.enqueue(process);
+		}
+
 
 		public void handle() {
 			Interrupt interrupt = interruptQueue.dequeue();
@@ -84,6 +96,12 @@ public class Scheduler extends Thread {
 					break;
 				case eReadTerminated:
 					HandleReadTerminated(interrupt.getProcess());
+					break;
+				case eWriteStart:
+					HandleWriteStart(interrupt.getProcess());
+					break;
+				case eWriteTerminated:
+					HandleWriteTerminated(interrupt.getProcess());
 					break;
 				default:
 					break;

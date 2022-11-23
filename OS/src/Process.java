@@ -163,7 +163,16 @@ public class Process {
 				this.PC = Integer.parseInt(instruction.getOperand1());
 			}
 		} else if (instruction.getCommand().compareTo("interrupt") == 0) {
-
+			Interrupt.EInterrupt eInterrupt = null;
+			if (instruction.getOperand1().compareTo("readInt")==0) {
+				eInterrupt = Interrupt.EInterrupt.eReadStart;
+			} else if (instruction.getOperand1().compareTo("writeInt")==0) {
+				eInterrupt = Interrupt.EInterrupt.eWriteStart;
+			} else if (instruction.getOperand1().compareTo("halt")==0) {
+				eInterrupt = Interrupt.EInterrupt.eProcessTerminated;
+			}
+			Interrupt interrupt = new Interrupt(eInterrupt, this);
+			interruptQueue.enqueue(interrupt);
 		}
 	}
 	
