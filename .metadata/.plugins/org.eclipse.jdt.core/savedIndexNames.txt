@@ -1,17 +1,4 @@
-<<<<<<< HEAD
-INDEX VERSION 1.131+C:\Users\user\Documents\강의자료_2022_최성운\git\202202\.metadata\.plugins\org.eclipse.jdt.core
-=======
-INDEX VERSION 1.131+C:\Users\chois\Source\java\classes\classes-202202\.metadata\.plugins\org.eclipse.jdt.core
-526671170.index
-4191092824.index
-2041923464.index
-1147090812.index
+INDEX VERSION 1.131+C:\Users\user\git\202202\.metadata\.plugins\org.eclipse.jdt.core
 1865797976.index
->>>>>>> branch 'master' of https://github.com/mjuclass/202202.git
+2041923464.index
 3770422834.index
-<<<<<<< HEAD
-2041923464.index
-1865797976.index
-1781747251.index
-=======
->>>>>>> branch 'master' of https://github.com/mjuclass/202202.git
