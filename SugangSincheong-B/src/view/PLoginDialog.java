@@ -47,7 +47,8 @@ public class PLoginDialog extends JDialog {
 		this.add(tfPassword);
 		
 		
-		JButton btLogin = new JButton("Login");    
+		JButton btLogin = new JButton("Login");
+		this.getRootPane().setDefaultButton(btLogin);
 		this.add(btLogin,BorderLayout.SOUTH);
 		
 		btLogin.addActionListener(actionHandler);
