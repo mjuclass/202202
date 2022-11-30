@@ -174,7 +174,7 @@ public class Process {
 				this.PC = Integer.parseInt(instruction.getOperand1());
 			}
 		} else if (instruction.getCommand().compareTo("push") == 0) {
-			this.push(instruction.getOperand1());
+			this.push(Integer.parseInt(instruction.getOperand1()));
 		} else if (instruction.getCommand().compareTo("interrupt") == 0) {
 			Interrupt.EInterrupt eInterrupt = null;
 			if (instruction.getOperand1().compareTo("readInt")==0) {
