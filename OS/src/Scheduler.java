@@ -60,11 +60,12 @@ public class Scheduler extends Thread {
 		}
 		private void HandleReadStart(Process process) {
 			// io start
-			waitQueue.enqueue(runningProcess);
+			waitQueue.enqueue(runningProcess);			
+			// fileSystem.read(runningProcess);			
 			runningProcess = readyQueue.dequeue();
 		}
 		private void HandleReadTerminated(Process process) {
-//			waitQueue.dequeue(process);
+			waitQueue.remove(process);
 			readyQueue.enqueue(process);
 		}
 		private void HandleWriteStart(Process process) {
@@ -73,7 +74,7 @@ public class Scheduler extends Thread {
 			runningProcess = readyQueue.dequeue();
 		}
 		private void HandleWriteTerminated(Process process) {
-//			waitQueue.dequeue(process);
+			waitQueue.remove(process);
 			readyQueue.enqueue(process);
 		}
 

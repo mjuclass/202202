@@ -18,6 +18,7 @@ public class Process {
 	private Vector<Instruction> codeList;
 	private Vector<Integer> dataSegment;
 	private Vector<Integer> stackSegment;
+	private int top;
 	private Vector<Integer> heapSegment;
 	
 	// Parser
@@ -35,6 +36,7 @@ public class Process {
 		this.codeList = new Vector<Instruction>();
 		this.dataSegment = new Vector<Integer>();
 		this.stackSegment = new Vector<Integer>();
+		this.top = 0;
 		this.heapSegment = new Vector<Integer>();
 		
 		this.labelMap = new HashMap<String, String>();
@@ -44,6 +46,15 @@ public class Process {
 	public void finish() {
 	}
 	
+	public void push(int value) {
+		this.stackSegment.set(top, value);		
+		this.top++;
+	}
+	public int pop() {
+		int value = this.stackSegment.get(top-1);
+		top = top -1;
+		return value;
+	}
 	
 	private void parseData (Scanner scanner) {
 		String command = scanner.next();
@@ -162,6 +173,8 @@ public class Process {
 				String label = instruction.getOperand1();
 				this.PC = Integer.parseInt(instruction.getOperand1());
 			}
+		} else if (instruction.getCommand().compareTo("push") == 0) {
+			this.push(instruction.getOperand1());
 		} else if (instruction.getCommand().compareTo("interrupt") == 0) {
 			Interrupt.EInterrupt eInterrupt = null;
 			if (instruction.getOperand1().compareTo("readInt")==0) {
