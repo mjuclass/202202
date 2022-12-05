@@ -1,7 +1,7 @@
 package view;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
 import java.awt.Toolkit;
 
@@ -32,26 +32,37 @@ public class PLoginDialog extends JDialog {
 		this.setLocation(size.width/2 - this.getWidth()/2, Constants.CLoginDialog.Y);		
 		this.setModal(true);
 		
-		LayoutManager layoutManager = new FlowLayout();
+		LayoutManager layoutManager = new GridBagLayout();
 		this.setLayout(layoutManager);
+		GridBagConstraints gridBagConstraint = new GridBagConstraints();
 		
+		gridBagConstraint.gridx = 0;
+		gridBagConstraint.gridy = 0;
 		JLabel lbId=new JLabel(Locale.LLoginPanel.ID_LABEL);    
-		this.add(lbId);
+		this.add(lbId, gridBagConstraint);
 		 		
+		gridBagConstraint.gridx = 1;
+		gridBagConstraint.gridy = 0;
 		this.tfId = new JTextField();
 		this.tfId.setColumns(10);
-		this.add(tfId);
+		this.add(tfId, gridBagConstraint);
 		
+		gridBagConstraint.gridx = 0;
+		gridBagConstraint.gridy = 1;
 		JLabel lbPassword =new JLabel(Locale.LLoginPanel.PASSWORD_LABEL);    
-		this.add(lbPassword);
+		this.add(lbPassword, gridBagConstraint);
 		
+		gridBagConstraint.gridx = 1;
+		gridBagConstraint.gridy = 1;
 		this.tfPassword = new JPasswordField();   
 		this.tfPassword.setColumns(10);
-		this.add(tfPassword);		
+		this.add(tfPassword, gridBagConstraint);		
 		
+		gridBagConstraint.gridx = 1;
+		gridBagConstraint.gridy = 2;
 		JButton btLogin = new JButton(Locale.OK_LABEL);    
 		this.getRootPane().setDefaultButton(btLogin);
-		this.add(btLogin,BorderLayout.SOUTH);
+		this.add(btLogin,gridBagConstraint);
 		btLogin.addActionListener(actionHandler);		
 		
 		this.sLogin = new SLogin();
@@ -61,7 +72,7 @@ public class PLoginDialog extends JDialog {
 		String id = this.tfId.getText();
 		char[] password = this.tfPassword.getPassword();
 		return this.sLogin.login(id);
+
 	}
-	
 
 }

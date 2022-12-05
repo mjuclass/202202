@@ -1,4 +1,4 @@
-package view;
+package viewSugangSincheong;
 
 import java.awt.LayoutManager;
 
@@ -6,7 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import view.PSugangsincheongPanel.ActionHandler;
+import viewSugangSincheong.PSugangsincheongPanel.ActionHandler;
 
 public class PControlPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
