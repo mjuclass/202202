@@ -1,13 +1,13 @@
-package view;
+package ViewSugangSingcheong;
 
 import java.util.Vector;
 
 import valueObject.VLecture;
 
-public class PSincheongPanel extends PLectureTable {
+public class PMiridamgiPanel extends PLectureTable {
 	private static final long serialVersionUID = 1L;
-	
-	public PSincheongPanel() {
+
+	public PMiridamgiPanel() {
 	}
 
 	public Vector<VLecture> getSelectedLectures() {

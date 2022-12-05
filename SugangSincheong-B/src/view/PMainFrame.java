@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import ViewSugangSingcheong.PSugangsincheongPanel;
 import global.Constants;
 import valueObject.VAccount;
 

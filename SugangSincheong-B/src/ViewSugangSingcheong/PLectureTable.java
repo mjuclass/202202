@@ -1,4 +1,4 @@
-package view;
+package ViewSugangSingcheong;
 
 import java.util.Vector;
 

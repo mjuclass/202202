@@ -1,4 +1,4 @@
-package view;
+package ViewSugangSingcheong;
 import java.awt.LayoutManager;
 import java.util.Vector;
 
