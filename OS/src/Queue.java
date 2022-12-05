@@ -27,6 +27,10 @@ public class Queue<T> extends Vector<T>{
 			this.add(null);
 		}
 	}
+	public void initialize() {
+	}
+	public void finish() {
+	}
 	
 	public void enqueue(T element) {
 		if (this.currentSize < this.maxSize) { 

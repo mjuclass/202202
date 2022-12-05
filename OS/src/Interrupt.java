@@ -4,6 +4,8 @@ public class Interrupt {
 		eTimeOut,
 		eProcessStart,
 		eProcessTerminated,
+		eOpenStart,
+		eOpenTerminated,
 		eReadStart,
 		eReadTerminated,
 		eWriteStart,

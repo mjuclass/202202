@@ -6,16 +6,14 @@ public class Scheduler extends Thread {
 	
 	// associations
 	private Queue<Interrupt> interruptQueue;
-	private Queue<Interrupt> fileIOCommandQueue;
+	private Queue<Interrupt> fileIOInterruptQueue;
 	
 	// working variables
 	private boolean bPowerOn;
 	private Process runningProcess;
 
 	/////////////////////////////////////////////////
-	public Scheduler( 
-			Queue<Interrupt> interruptQueue, 
-			Queue<Interrupt> fileIOCommandQueue) {
+	public Scheduler(Queue<Interrupt> interruptQueue, Queue<Interrupt> fileIOInterruptQueue) {
 		// components
 		this.interruptHandler = new InterruptHandler();			
 		this.readyQueue = new Queue<Process>();
@@ -23,11 +21,15 @@ public class Scheduler extends Thread {
 		
 		// associations
 		this.interruptQueue = interruptQueue;
-		this.fileIOCommandQueue = fileIOCommandQueue;
+		this.fileIOInterruptQueue = fileIOInterruptQueue;
 		
 		// working objects
 		this.runningProcess = null;			
 		this.bPowerOn = true;
+	}
+	public void initialize() {
+	}
+	public void finish() {
 	}
 
 	public void run() {
