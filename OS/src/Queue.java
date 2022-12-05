@@ -44,4 +44,5 @@ public class Queue<T> extends Vector<T>{
 		}
 		return element;
 	}
+
 }

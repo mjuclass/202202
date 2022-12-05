@@ -1,39 +1,43 @@
 public class Scheduler extends Thread {
-	// component
-	private InterruptHandler interruptHandler;
-	private Queue<Process> readyQueue;
-	private Queue<Process> waitQueue;
-	
-	// associations
-	private Queue<Interrupt> interruptQueue;
-	
 	// working variables
 	private boolean bPowerOn;
 	private Process runningProcess;
+	
+	// component
+	private Queue<Process> readyQueue;
+	private Queue<Process> waitQueue;
+	private InterruptHandler interruptHandler;
+	
+	// associations
+	private Queue<Interrupt> interruptQueue;	
 
 	/////////////////////////////////////////////////
-	public Scheduler( 
-			Queue<Interrupt> interruptQueue) {
+	public Scheduler( Queue<Interrupt> interruptQueue) {
+		// working objects
+		this.runningProcess = null;			
+		this.bPowerOn = true;
+		
 		// components
 		this.interruptHandler = new InterruptHandler();			
 		this.readyQueue = new Queue<Process>();
 		this.waitQueue = new Queue<Process>();
 		
 		// associations
-		this.interruptQueue = interruptQueue;
-		
-		// working objects
-		this.runningProcess = null;			
-		this.bPowerOn = true;
+		this.interruptQueue = interruptQueue;		
 	}
-
+	public void initialize() {	
+	}
+	
+	public void finish() {
+	}
+	
 	public void run() {
 		while (this.bPowerOn) {
 			this.interruptHandler.handle();
-			if (this.runningProcess != null) {
-				this.runningProcess.executeInstruction(interruptQueue);
-			} else {
+			if (this.runningProcess == null) {
 				this.runningProcess = this.readyQueue.dequeue();
+			} else {
+				this.runningProcess.executeInstruction(interruptQueue);
 			}
 		}
 	}
@@ -43,9 +47,15 @@ public class Scheduler extends Thread {
 		public InterruptHandler() {
 		}
 		
+		public void initialize() {	
+		}
+		
+		public void finish() {
+		}
+		
 		private void HandleTimeOut(Process process) {
-			readyQueue.enqueue(runningProcess);
-			runningProcess = readyQueue.dequeue();
+//			getReadyQueue().enqueue(runningProcess);
+//			runningProcess = getReadyQueue().dequeue();
 		}
 		private void HandleProcessStart(Process process) {
 			process.initialize();
@@ -56,19 +66,25 @@ public class Scheduler extends Thread {
 			runningProcess = null;
 		}
 		private void HandleReadStart(Process process) {
-			waitQueue.enqueue(runningProcess);
+			// io start
+			waitQueue.enqueue(runningProcess);			
+			// fileSystem.read(runningProcess);			
 			runningProcess = readyQueue.dequeue();
 		}
 		private void HandleReadTerminated(Process process) {
+			waitQueue.remove(process);
 			readyQueue.enqueue(process);
 		}
 		private void HandleWriteStart(Process process) {
+			// io start
 			waitQueue.enqueue(runningProcess);
 			runningProcess = readyQueue.dequeue();
 		}
 		private void HandleWriteTerminated(Process process) {
+			waitQueue.remove(process);
 			readyQueue.enqueue(process);
 		}
+
 
 		public void handle() {
 			Interrupt interrupt = interruptQueue.dequeue();

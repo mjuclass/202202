@@ -7,6 +7,13 @@ public class QueueSynchronized<T> extends Queue<T>{
 	public QueueSynchronized() {
 		super(MAX_NUM_ELEMENT);
 	}
+	
+	public void initialize() {	
+	}
+	
+	public void finish() {
+	}
+	
 	public synchronized void enqueue(T element) {
 		super.enqueue(element);
 	}

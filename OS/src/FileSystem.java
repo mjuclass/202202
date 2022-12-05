@@ -1,8 +1,10 @@
+import java.util.Vector;
+
 public class FileSystem extends Thread {
 
 	private Queue<Interrupt> interruptQueue;
 	
-	public FileSystem(Queue<Interrupt> interruptQueue) {
+	public FileSystem(Queue<Interrupt> interruptQueue) {		
 		this.interruptQueue = interruptQueue;
 	}
 	
@@ -12,8 +14,6 @@ public class FileSystem extends Thread {
 	}
 
 	
-	public void run() {
-		
+	public void run() {		
 	}
-
 }
