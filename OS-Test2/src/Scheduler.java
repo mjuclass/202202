@@ -1,36 +1,40 @@
 public class Scheduler extends Thread {
-	// working variables
-	private boolean bPowerOn;
-	private Process runningProcess;
 	
+	// associations
+	private Queue<Interrupt> interruptQueue;
+	private Queue<Interrupt> fileIOInterruptQueue;
 	// component
 	private Queue<Process> readyQueue;
 	private Queue<Process> waitQueue;
+	
 	private InterruptHandler interruptHandler;
 	
-	// associations
-	private Queue<Interrupt> interruptQueue;	
+	// working variables
+	private boolean bPowerOn;
+	private Process runningProcess;
 
 	/////////////////////////////////////////////////
-	public Scheduler( Queue<Interrupt> interruptQueue) {
-		// working objects
-		this.runningProcess = null;			
-		this.bPowerOn = true;
+	public Scheduler(Queue<Interrupt> interruptQueue, Queue<Interrupt> fileIOInterruptQueue) {
+		this.interruptQueue = interruptQueue;
+		this.fileIOInterruptQueue = fileIOInterruptQueue;
 		
-		// components
-		this.interruptHandler = new InterruptHandler();			
 		this.readyQueue = new Queue<Process>();
 		this.waitQueue = new Queue<Process>();
 		
-		// associations
-		this.interruptQueue = interruptQueue;		
-	}
-	public void initialize() {	
+		this.interruptHandler = new InterruptHandler(
+				this.interruptQueue, this.fileIOInterruptQueue,
+				this.readyQueue, this.waitQueue);			
+		
+		// working objects
+		this.runningProcess = null;			
+		this.bPowerOn = true;
 	}
 	
+	public void initialize() {
+	}
 	public void finish() {
 	}
-	
+
 	public void run() {
 		while (this.bPowerOn) {
 			this.interruptHandler.handle();
@@ -44,50 +48,47 @@ public class Scheduler extends Thread {
 	
 	private class InterruptHandler {
 
-		public InterruptHandler() {
-		}
+		private Queue<Interrupt> interruptQueue;
+		private Queue<Interrupt> fileIOInterruptQueue;
+		private Queue<Process> readyQueue;
+		private Queue<Process> waitQueue;
 		
-		public void initialize() {	
-		}
-		
-		public void finish() {
+		public InterruptHandler(
+				Queue<Interrupt> interruptQueue, Queue<Interrupt> fileIOInterruptQueue,
+				Queue<Process> readyQueue, Queue<Process> waitQueue) {
+			this.interruptQueue = interruptQueue;
+			this.fileIOInterruptQueue = fileIOInterruptQueue;
+			
+			this.readyQueue = readyQueue;
+			this.waitQueue = waitQueue;
 		}
 		
 		private void HandleTimeOut(Process process) {
-//			getReadyQueue().enqueue(runningProcess);
-//			runningProcess = getReadyQueue().dequeue();
+			this.readyQueue.enqueue(process);
+			runningProcess = this.readyQueue.dequeue();
 		}
 		private void HandleProcessStart(Process process) {
 			process.initialize();
-			readyQueue.enqueue(process);
+			this.readyQueue.enqueue(process);
 		}
 		private void HandleProcessTerminated(Process process) {
 			process.finish();
-			runningProcess = null;
+			runningProcess = this.readyQueue.dequeue();;
 		}
-		private void HandleReadStart(Process process) {
-			// io start
-			waitQueue.enqueue(runningProcess);			
-			// fileSystem.read(runningProcess);			
-			runningProcess = readyQueue.dequeue();
+		
+		private void HandleFileIOStart(Interrupt.EInterrupt eInterrupt, Process process) {
+			waitQueue.enqueue(process);
+			Interrupt interrupt = new Interrupt(eInterrupt, process);
+			this.fileIOInterruptQueue.enqueue(interrupt);
+			runningProcess = this.readyQueue.dequeue();
 		}
-		private void HandleReadTerminated(Process process) {
+		private void HandleFileIOTerminated(Interrupt.EInterrupt eInterrupt, Process process) {
 			waitQueue.remove(process);
 			readyQueue.enqueue(process);
 		}
-		private void HandleWriteStart(Process process) {
-			// io start
-			waitQueue.enqueue(runningProcess);
-			runningProcess = readyQueue.dequeue();
-		}
-		private void HandleWriteTerminated(Process process) {
-			waitQueue.remove(process);
-			readyQueue.enqueue(process);
-		}
-
 
 		public void handle() {
-			Interrupt interrupt = interruptQueue.dequeue();
+			Interrupt interrupt = this.interruptQueue.dequeue();
 			if (interrupt != null) {
 				switch (interrupt.geteInterrupt()) {
 				case eTimeOut:
@@ -99,19 +100,19 @@ public class Scheduler extends Thread {
 				case eProcessTerminated:
 					HandleProcessTerminated(interrupt.getProcess());
 					break;
+				case eOpenStart:
+				case eCloseStart:
 				case eReadStart:
-					HandleReadStart(interrupt.getProcess());
-					break;
-				case eReadTerminated:
-					HandleReadTerminated(interrupt.getProcess());
-					break;
 				case eWriteStart:
-					HandleWriteStart(interrupt.getProcess());
+					HandleFileIOStart(interrupt.geteInterrupt(), interrupt.getProcess());
 					break;
+				case eOpenTerminated:
+				case eCloseTerminated:
+				case eReadTerminated:
 				case eWriteTerminated:
-					HandleWriteTerminated(interrupt.getProcess());
+					HandleFileIOTerminated(interrupt.geteInterrupt(), interrupt.getProcess());
 					break;
-				default:
+			default:
 					break;
 				}
 			}

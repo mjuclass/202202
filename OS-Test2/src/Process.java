@@ -4,46 +4,62 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class Process {
-	// CPU
+	// CPU Registers
 	private static final int MAX_REGISTERS = 10;
-	
-	private int PC;	
+	private int PC;
 	private Vector<Integer> registers;
 	private boolean bGreaterThan;
 	private boolean bEqual;
+	private int top;
 	
+	// file IO
+	private FileSystem.FileControlBlock fileControlBlock;
+	
+	// process
 	private int codeSize, dataSize, stackSize, heapSize;
 	
 	// Memory
 	private Vector<Instruction> codeList;
 	private Vector<Integer> dataSegment;
 	private Vector<Integer> stackSegment;
-	private int top;
 	private Vector<Integer> heapSegment;
 	
 	// Parser
 	private Map<String, String> labelMap;
 	 
 	public Process() {
-		this.bEqual = false;
-		this.bGreaterThan = false;
-		
+		// registers
 		this.registers = new Vector<Integer>();
 		for (int i=0; i<MAX_REGISTERS; i++) {
 			this.registers.add(i);
 		}
+		this.bEqual = false;
+		this.bGreaterThan = false;
+
+		// file IO
+		this.fileControlBlock = null;
 		
+		// process
 		this.codeList = new Vector<Instruction>();
 		this.dataSegment = new Vector<Integer>();
 		this.stackSegment = new Vector<Integer>();
 		this.top = 0;
 		this.heapSegment = new Vector<Integer>();
 		
+		// parser
 		this.labelMap = new HashMap<String, String>();
 	}
+	
 	public void initialize() {
 	}
 	public void finish() {
+	}
+	
+	public FileSystem.FileControlBlock getFileControlBlock() {
+		return this.fileControlBlock;
+	}
+	public void getFileControlBlock(FileSystem.FileControlBlock fileControlBlock) {
+		this.fileControlBlock = fileControlBlock;;
 	}
 	
 	public void push(int value) {

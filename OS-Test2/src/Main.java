@@ -1,36 +1,40 @@
 public class Main {
-	private Queue<Interrupt> interruptQueue;
 	
-	private Scheduler scheduler;
+	private Queue<Interrupt> interruptQueue;
+	private Queue<Interrupt> fileIOInterruptQueue;
+	
 	private UI ui;
-	private FileSystem fileSystem;
+	private Scheduler scheduler;
+	private FileSystem fileSystem;	
 	
 	public Main() {		
 		this.interruptQueue = new QueueSynchronized<Interrupt>();
+		this.fileIOInterruptQueue = new QueueSynchronized<Interrupt>();
 		
-		this.scheduler = new Scheduler(interruptQueue);
-		this.ui = new UI(interruptQueue);		
-		this.fileSystem = new FileSystem(interruptQueue);		
+		this.ui = new UI(this.interruptQueue);		
+		this.scheduler = new Scheduler(this.interruptQueue, fileIOInterruptQueue);
+		this.fileSystem = new FileSystem(this.interruptQueue, fileIOInterruptQueue);		
 	}
 	private void initialize() {
 		this.interruptQueue.initialize();
+		this.fileIOInterruptQueue.initialize();
 		
+		this.ui.initialize();		
 		this.scheduler.initialize();
-		this.ui.initialize();
 		this.fileSystem.initialize();
 	}
-	
 	private void finish() {		
+		this.ui.finish();		
 		this.scheduler.finish();
-		this.ui.finish();
 		this.fileSystem.finish();
 		
 		this.interruptQueue.finish();
+		this.fileIOInterruptQueue.finish();
 	}
 
-	private void run() {
-		scheduler.start();		
+	private void run() {		
 		ui.start();		
+		scheduler.start();		
 		fileSystem.start();
 	}
 	

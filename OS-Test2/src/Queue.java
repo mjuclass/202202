@@ -27,9 +27,8 @@ public class Queue<T> extends Vector<T>{
 			this.add(null);
 		}
 	}
-	public void initialize() {	
+	public void initialize() {
 	}
-	
 	public void finish() {
 	}
 	
