@@ -12,7 +12,6 @@ public class PLectureTable extends JTable {
 	private static final long serialVersionUID = 1L;
 	
 	private SLecture sLecture;
-	private Vector<VLecture> vLectures;
 	
 	private DefaultTableModel tableModel;
 	public PLectureTable() {
@@ -25,14 +24,16 @@ public class PLectureTable extends JTable {
 		this.tableModel = new DefaultTableModel(header, 0);
 		this.setModel(this.tableModel);			
 	}
-	public Vector<VLecture> getVLectures() {
-		return this.vLectures;
+	
+	// read data from file/db
+	public Vector<VLecture> queryData(String fileName) {
+		this.sLecture = new SLecture();
+		return this.sLecture.getLectures(fileName);		
 	}
 	
-	public void setData(String fileName) {
-		this.sLecture = new SLecture();
-		this.vLectures = sLecture.getLectures(fileName);
-
+	// set data to Table
+	public void setData(Vector<VLecture> vLectures) {
+		
 		this.tableModel.setNumRows(0);
 		for (VLecture vLecture: vLectures) {				
 			Vector<String> row = new Vector<String>();
@@ -45,6 +46,11 @@ public class PLectureTable extends JTable {
 			this.tableModel.addRow(row);		
 		}
 		this.setRowSelectionInterval(0, 0);
+	}
+
+	public Vector<VLecture> getSelectedLectures() {
+		int[] selectedIndices = this.getSelectedRows();
+		return null;
 	}
 }
 

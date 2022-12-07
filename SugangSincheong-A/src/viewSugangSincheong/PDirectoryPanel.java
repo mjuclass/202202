@@ -90,20 +90,21 @@ public class PDirectoryPanel extends JPanel {
 			selectedIndices = this.departmentTable.getSelectedRows();
 			if (selectedIndices.length > 0) {
 				fileName = this.departmentTable.getFileName(selectedIndices[0]);
-				this.lectureTable.setData(fileName);
+				
+				Vector<VLecture> vLectures = this.lectureTable.queryData(fileName);
+				this.lectureTable.setData(vLectures);
 			}
 		} else if (object == this.lectureTable) {		
 		}
 	}
 	
 	public Vector<VLecture> getSelectedLectures() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.lectureTable.getSelectedLectures();
 	}
-	public void addLectures(Vector<VLecture> vLectures) {
-		// TODO Auto-generated method stub
-		
-	}
+//	public void addLectures(Vector<VLecture> vLectures) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 	private class ListSelectionHandler implements ListSelectionListener {
 
 		@Override

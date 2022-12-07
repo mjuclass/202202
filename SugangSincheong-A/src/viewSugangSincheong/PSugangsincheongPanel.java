@@ -15,9 +15,9 @@ public class PSugangsincheongPanel extends JPanel {
 
 	private PDirectoryPanel directoryPanel;
 	private PControlPanel controlPanel1;
-	private PMiridamgiPanel miridamgiPanel;
+	private PLectureTable miridamgiPanel;
 	private PControlPanel controlPanel2;
-	private PSincheongPanel sincheongPanel;
+	private PLectureTable sincheongPanel;
 	
 	public PSugangsincheongPanel() {
 		ActionHandler actionHandler = new ActionHandler();
@@ -32,7 +32,7 @@ public class PSugangsincheongPanel extends JPanel {
 		this.add(this.controlPanel1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		this.miridamgiPanel = new PMiridamgiPanel();
+		this.miridamgiPanel = new PLectureTable();
 		scrollPane.setViewportView(this.miridamgiPanel);
 		this.add(scrollPane);
 		
@@ -40,29 +40,29 @@ public class PSugangsincheongPanel extends JPanel {
 		this.add(this.controlPanel2);
 		
 		scrollPane = new JScrollPane();
-		this.sincheongPanel = new PSincheongPanel();
+		this.sincheongPanel = new PLectureTable();
 		scrollPane.setViewportView(this.sincheongPanel);
 		this.add(scrollPane);		
 	}
 	
 	private void moveFromLectureToMiridamgi() {
 		Vector<VLecture> vLectures = this.directoryPanel.getSelectedLectures();
-		this.miridamgiPanel.addLectures(vLectures);
+		this.miridamgiPanel.setData(vLectures);
 		System.out.println("1moveFromLectureToMiridamgi");
 	}
 	private void moveFromMiridamgiToLecture() {
-		Vector<VLecture> vLectures = this.miridamgiPanel.getSelectedLectures();
-		this.directoryPanel.addLectures(vLectures);
+//		Vector<VLecture> vLectures = this.miridamgiPanel.getSelectedLectures();
+//		this.directoryPanel.addLectures(vLectures);
 		System.out.println("2moveFromMiridamgiToLecture");
 	}
 	private void moveFromMiridamgiToSincheong() {
-		Vector<VLecture> vLectures = this.miridamgiPanel.getSelectedLectures();
-		this.sincheongPanel.addLectures(vLectures);
+//		Vector<VLecture> vLectures = this.miridamgiPanel.getSelectedLectures();
+//		this.sincheongPanel.setData(vLectures);
 		System.out.println("3moveFromMiridamgiToSincheong");
 	}
 	private void moveFromSincheongToMiridamgi() {
-		Vector<VLecture> vLectures = this.sincheongPanel.getSelectedLectures();
-		this.miridamgiPanel.addLectures(vLectures);
+//		Vector<VLecture> vLectures = this.sincheongPanel.getSelectedLectures();
+//		this.miridamgiPanel.setData(vLectures);
 		System.out.println("4moveFromSincheongToMiridamgi");
 	}
 	

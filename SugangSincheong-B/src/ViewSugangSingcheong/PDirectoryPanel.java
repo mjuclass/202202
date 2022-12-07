@@ -89,7 +89,8 @@ public class PDirectoryPanel extends JPanel {
 			selectedIndices = this.departmentTable.getSelectedRows();
 			if (selectedIndices.length > 0) {
 				fileName = this.departmentTable.getVDirectories().get(selectedIndices[0]).getFileName();
-				this.lectureTable.setData(fileName);
+				Vector<VLecture> vLectures = this.lectureTable.queryData(fileName);
+				this.lectureTable.setData(vLectures);
 			}
 		} else if (object == this.lectureTable.getSelectionModel()) {
 			
@@ -97,9 +98,7 @@ public class PDirectoryPanel extends JPanel {
 	}
 	
 	public Vector<VLecture> getSelectedLectures() {
-		return null;
-	}
-	public void addLectures(Vector<VLecture> lectures) {
+		return this.lectureTable.getSelectedLectures();
 	}
 
 	private class ListSelectionHandler implements ListSelectionListener {
